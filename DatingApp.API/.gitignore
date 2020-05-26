@@ -1,0 +1,4 @@
+.vsignore
+bin
+obj
+*.db
