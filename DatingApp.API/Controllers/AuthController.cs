@@ -29,10 +29,18 @@ namespace DatingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            
+
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExists(userForRegisterDto.Username))
                 return BadRequest("User Name Already exists");
+            
+            else if (userForRegisterDto.Username == "")
+            return BadRequest("UserName cannot be blank");
+
+            else if (userForRegisterDto.Password.Length < 8)
+            return BadRequest("Password cannot be less than 8");
 
             var UserToCreate = new User
             {
@@ -47,7 +55,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            throw new Exception("Computer Says No!");
+            
             
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
             {
