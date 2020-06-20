@@ -40,9 +40,4 @@ localStorage.removeItem('token');
 console.log('logged out successfully');
 this.router.navigate(['/home']);
 }
-
-
-
-
-
 }
